@@ -14,8 +14,9 @@ module.exports = {
 	$routes: {
 		$({ _key, _val }) {
 			_.each(_val, (val, key) => {
+				val = Array.isArray(val) ? val : [ val ];
 				const [ method, path ] = key.split(' ');
-				router[method](path, val);
+				router[method](path, ...val);
 			});
 		}
 	},
