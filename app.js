@@ -1,13 +1,13 @@
 const bodyParser = require('koa-bodyparser');
 const cache = require('koa-redis-cache');
 const cors = require('@koa/cors');
-const hooks = require('./hooks');
-const requireDir = require('require-dir');
-const Mhr = require('menhera').default;
+const _ = require('lodash');
+
+const Mhr = require('./hooks');
 
 const { PORT = 8001, REDIS_HOST, REDIS_PORT } = process.env;
 
-Mhr.$use(hooks).$use({
+Mhr.$use({
 	use: [
 		bodyParser(),
 		cors({
@@ -40,7 +40,6 @@ Mhr.$use(hooks).$use({
 			}
 		}
 	],
-	routes: requireDir('./routes'),
 	config: {
 		PORT
 	}
